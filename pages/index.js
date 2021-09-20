@@ -1,6 +1,6 @@
-import Speakers from "../src/components/Speakers";
+import App from "../src/components/App";
 export default function IndexPage() {
   return (
-   <Speakers />
+   <App />
   )
 }

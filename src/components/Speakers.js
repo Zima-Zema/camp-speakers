@@ -1,10 +1,25 @@
-import { data } from '../../SpeakerData';
+import { useState } from "react";
+
+import SpeakersToolbar from './SpeakersToolbar';
 import SpeakerList from './SpeakerList';
 
-export default function Speakers() {
+export default function Speakers({ theme, handleTheme }) {
+    const [showSessions, setShowSessions] = useState(true);
+
+    const handleShowSessions = (event) => {
+        setShowSessions(event.target.checked);
+    }
     return (
-        <div className="container-fluid">
-            <SpeakerList data={data} />
-        </div>
+        <>
+            <SpeakersToolbar
+                theme={theme}
+                handleTheme={handleTheme}
+                showSessions={showSessions}
+                handleShowSessions={handleShowSessions}
+            />
+            <SpeakerList
+                showSessions={showSessions}
+            />
+        </>
     )
 }

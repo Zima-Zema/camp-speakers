@@ -27,8 +27,16 @@ function SpeakerImage({ id, first, last }) {
         </div>
     )
 }
-
-function SpeakerDemographics({ demographic }) {
+function SpeakerFavorites({ favorite, onFavoriteToggle }) {
+    return (
+        <div className="action padB1">
+            <span onClick={onFavoriteToggle}>
+                <i className={favorite ? "fa fa-star orange" : "fa fa-star-o orange"} /> {" "} Favorite
+            </span>
+        </div>
+    )
+}
+function SpeakerDemographics({ demographic, onFavoriteToggle }) {
     const { first, last, bio, company, twitterHandle, favorite } = demographic;
     return (
         <div className="speaker-info">
@@ -37,6 +45,9 @@ function SpeakerDemographics({ demographic }) {
                     {first} {last}
                 </h3>
             </div>
+
+            <SpeakerFavorites onFavoriteToggle={onFavoriteToggle} favorite={favorite} />
+
             <div>
                 <p className="card-description">{bio}</p>
                 <div className="social d-flex flex-row mt-4">
@@ -54,15 +65,15 @@ function SpeakerDemographics({ demographic }) {
     )
 }
 
-export default function Speaker({ speaker }) {
+export default function Speaker({ speaker, showSessions, onFavoriteToggle }) {
     const { id, first, last, sessions } = speaker;
     return (
         <div className="col-xs-12 col-sm-12 col-md-6 col-lg-4 col-sm-12 col-xs-12">
             <div className="card card-height p-4 mt-4">
                 <SpeakerImage id={id} first={first} last={last} />
-                <SpeakerDemographics demographic={speaker} />
+                <SpeakerDemographics onFavoriteToggle={onFavoriteToggle} demographic={speaker} />
             </div>
-            <SessionList sessions={sessions} />
+            {showSessions ? <SessionList sessions={sessions} /> : null}
         </div>
     )
 }
