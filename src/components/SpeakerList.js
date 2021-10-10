@@ -1,16 +1,17 @@
+import { data } from '../../SpeakerData';
 import Speaker from './Speaker';
-import useRequestSpeakers, { REQUEST_STATUS } from '../hooks/useRequestDelay';
+import useRequestDelay, { REQUEST_STATUS } from '../hooks/useRequestDelay';
 import ReactPlaceholder from 'react-placeholder';
 import "react-placeholder/lib/reactPlaceholder.css";
 
 export default function SpeakerList({ showSessions }) {
 
   const {
-    speakersData,
+    data: speakersData,
     requestStatus,
     error,
-    onFavoriteToggle
-  } = useRequestSpeakers(2000);
+    updateRecord
+  } = useRequestDelay(2000, data);
 
 
   if (requestStatus === REQUEST_STATUS.FAILURE) {
@@ -36,7 +37,12 @@ export default function SpeakerList({ showSessions }) {
                 key={speaker.id}
                 speaker={speaker}
                 showSessions={showSessions}
-                onFavoriteToggle={() => onFavoriteToggle(speaker.id)}
+                onFavoriteToggle={() => {
+                  updateRecord({
+                  ...speaker,
+                  favorite: !speaker.favorite,
+                });
+                }}
               />
             );
           })}

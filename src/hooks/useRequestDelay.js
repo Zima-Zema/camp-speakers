@@ -1,4 +1,3 @@
-// import { data } from '../../SpeakerData';
 import { useEffect, useState } from 'react';
 
 export const REQUEST_STATUS = {
@@ -27,27 +26,27 @@ export default function useRequestDelay(delayTime = 1000, initialData = []) {
         }
         runDelay();
     });
+
     const updateRecord = (update) => {
-        const newSpeakersData = speakersData.map(speaker => {
-            return {
-                ...speaker,
-                favorite: speaker.id === update.id ? update : speaker
+        console.log(update);
+        const newSpeakersData = data.map(speaker => speaker.id === update.id ? update : speaker);
+        console.log(newSpeakersData);
+
+        async function delayFunction() {
+            try {
+                await delay(delayTime);
+                setData(newSpeakersData);
+            } catch (error) {
+                console.error("error thrown inside delayFunction", error);
             }
-        });
-       async function delayFunction() {
-           try {
-               await delay(delayTime);
-               setData(newSpeakersData);
-           } catch (error) {
-               
-           }
-       }
+        }
+        delayFunction();
     }
 
     return {
-        speakersData,
+        data,
         requestStatus,
         error,
-        onFavoriteToggle
+        updateRecord
     }
 }
