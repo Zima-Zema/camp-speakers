@@ -28,6 +28,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           <link href="css/local-styles.css" rel="stylesheet" />
+          <link href="css/loader.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
