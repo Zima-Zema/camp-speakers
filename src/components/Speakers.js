@@ -1,9 +1,8 @@
 import { useState } from "react";
-
 import SpeakersToolbar from './SpeakersToolbar';
 import SpeakerList from './SpeakerList';
 
-export default function Speakers({ theme, handleTheme }) {
+export default function Speakers() {
     const [showSessions, setShowSessions] = useState(true);
 
     const handleShowSessions = (event) => {
@@ -12,8 +11,6 @@ export default function Speakers({ theme, handleTheme }) {
     return (
         <>
             <SpeakersToolbar
-                theme={theme}
-                handleTheme={handleTheme}
                 showSessions={showSessions}
                 handleShowSessions={handleShowSessions}
             />

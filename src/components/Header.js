@@ -1,4 +1,11 @@
-export default function Header({ theme }) {
+import { useContext } from 'react';
+import { ThemeContext } from './Layout';
+
+
+export default function Header() {
+
+    const { theme } = useContext(ThemeContext);
+
     return (
         <div className="padT4 padB4">
             <div className="container mobile-container">
@@ -7,7 +14,7 @@ export default function Header({ theme }) {
                         <img alt="SVCC Home Page" src="/images/SVCCLogo.png" />
                     </div>
                     <div className="light">
-                        <h4 className={theme === 'light' ? "header-title" : "header-title text-info" }>Silicon Valley Code Camp</h4>
+                        <h4 className={theme === 'light' ? "header-title" : "header-title text-info"}>Silicon Valley Code Camp</h4>
                     </div>
                     <div className={theme === 'light' ? `text-dark` : `text-light`}>
                         Hello Mr. Smith &nbsp;&nbsp;
