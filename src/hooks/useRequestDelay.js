@@ -28,15 +28,18 @@ export default function useRequestDelay(delayTime = 1000, initialData = []) {
     });
 
     const updateRecord = (update, doneCallback) => {
+        const originalData = [...data];
         const newSpeakersData = data.map(speaker => speaker.id === update.id ? update : speaker);
         async function delayFunction() {
             try {
+                setData(newSpeakersData);
                 await delay(delayTime);
                 if (doneCallback)
                     doneCallback();
-                setData(newSpeakersData);
             } catch (error) {
                 console.error("error thrown inside delayFunction", error);
+                if (doneCallback) doneCallback();
+                setData(originalData);
             }
         }
         delayFunction();
