@@ -29,10 +29,10 @@ export default function useRequestDelay(delayTime = 1000, initialData = []) {
 
     const updateRecord = (update, doneCallback) => {
         const originalData = [...data];
-        const newSpeakersData = data.map(speaker => speaker.id === update.id ? update : speaker);
+        const newRecords = data.map(record => record.id === update.id ? update : record);
         async function delayFunction() {
             try {
-                setData(newSpeakersData);
+                setData(newRecords);
                 await delay(delayTime);
                 if (doneCallback)
                     doneCallback();
@@ -51,4 +51,4 @@ export default function useRequestDelay(delayTime = 1000, initialData = []) {
         error,
         updateRecord
     }
-}
+}   
